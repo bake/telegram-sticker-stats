@@ -1,4 +1,4 @@
-# Sticker Stats
+# Telegram Sticker Stats
 
 A simple script to extract the usage of a Telegram sticker set as CSV that can be plotted.
 
