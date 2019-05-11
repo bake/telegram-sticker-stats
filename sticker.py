@@ -10,6 +10,8 @@ from telethon import TelegramClient, sync, events
 
 load_dotenv()
 
+today = datetime.today()
+
 client = TelegramClient('anon', os.getenv('API_ID'), os.getenv('API_HASH'))
 client.start()
 
@@ -25,7 +27,7 @@ async def handler(event):
     date = datetime.strptime(m.group(1), '%m/%d/%Y')
     print(date.date(), m.group(2), m.group(3), m.group(4), sep=',')
 
-    if date.date() == datetime.now().date():
+    if date.date() == today.date():
         await client.disconnect()
 
 client.send_message('Stickers', '/cancel')
@@ -34,7 +36,7 @@ client.send_message('Stickers', sys.argv[1])
 time.sleep(1)
 
 for days in range(356, -1, -1):
-    date = datetime.now() - timedelta(days)
+    date = today - timedelta(days)
     client.send_message('Stickers', date.strftime('%m/%d/%Y'))
 
 client.run_until_disconnected()
